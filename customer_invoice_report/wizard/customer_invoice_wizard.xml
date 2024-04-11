@@ -1,0 +1,47 @@
+<odoo>
+    <record id="invoice_excel_wizard_form" model="ir.ui.view">
+        <field name="name">invoice.excel.wizard.form</field>
+        <field name="model">customer.invoice.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group invisible = "specific_date == True or year_and_month == True">
+                            <field name="invoice_date" string="Invoice Date From" required="specific_date != True and year_and_month != True"/>
+                            <field name="invoice_to_date" string="Invoice To Date" required="specific_date != True and year_and_month != True"/>
+                        </group>
+                        <group invisible = "specific_date != True">
+                            <field name="invoice_date" string="Invoiced Date" required="specific_date == True"/>
+                        </group>
+                        <group invisible = "year_and_month != True">
+                            <field name="year" string="Year" required="year_and_month == True"/>
+                            <field name="month" string="Month" readonly="year == False"/>
+                        </group>
+                        <group>
+                            <field name="specific_date" readonly="year_and_month == True"/>
+                            <field name="year_and_month" readonly="specific_date == True"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_excel_report" string="Print" type="object" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_invoice_wizard" model="ir.actions.act_window">
+        <field name="name">Customer Invoice - Excel</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">customer.invoice.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="excel_invoice_menu"
+              name="Customer Invoice - Excel"
+              parent="account.menu_finance_reports"
+              action="action_customer_invoice_wizard"
+              sequence="-1"/>
+</odoo>

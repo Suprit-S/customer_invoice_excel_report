@@ -1,0 +1,10 @@
+<odoo>
+    <record id="customer_invoice_report" model="ir.actions.report">
+        <field name="name">Customer Invoice</field>
+        <field name="model">customer.invoice.wizard</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">customer_invoice_report.report_customer_invoice_xls</field>
+        <field name="report_file">customer_invoice_report.report_customer_invoice_xls</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
